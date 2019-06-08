@@ -1,16 +1,16 @@
 {
-  "name": "vgit",
+  "name": "vigit",
   "version": "1.0.0",
   "description": "Visual interface of git for terminal",
-  "main": "vgit.js",
+  "main": "vigit.js",
   "preferGlobal": true,
-  "bin": "./vgit.js",
+  "bin": "./vigit.js",
   "scripts": {
-    "test": "vgit-test"
+    "test": "vigit-test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Z01011010Z/vgit.git"
+    "url": "git+https://github.com/Z01011010Z/vigit.git"
   },
   "keywords": [
     "git",
@@ -20,9 +20,9 @@
   "author": "Z01011010",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Z01011010Z/vgit/issues"
+    "url": "https://github.com/Z01011010Z/vigit/issues"
   },
-  "homepage": "https://github.com/Z01011010Z/vgit#readme",
+  "homepage": "https://github.com/Z01011010Z/vigit#readme",
   "dependencies": {
     "blessed": "^0.1.81",
     "simple-git": "^1.113.0"
