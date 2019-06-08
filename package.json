@@ -1,0 +1,28 @@
+{
+  "name": "vgit",
+  "version": "1.0.0",
+  "description": "Visual interface of git for terminal",
+  "main": "vgit.js",
+  "scripts": {
+    "test": "vgit-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Z01011010Z/vgit.git"
+  },
+  "keywords": [
+    "git",
+    "terminal",
+    "gui"
+  ],
+  "author": "Z01011010",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Z01011010Z/vgit/issues"
+  },
+  "homepage": "https://github.com/Z01011010Z/vgit#readme",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "simple-git": "^1.113.0"
+  }
+}
