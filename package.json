@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Visual interface of git for terminal",
   "main": "vgit.js",
+  "preferGlobal": true,
+  "bin": "./vgit.js",
   "scripts": {
     "test": "vgit-test"
   },

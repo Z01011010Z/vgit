@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const git = require('simple-git')(process.cwd());
 const blessed = require('blessed')
 
