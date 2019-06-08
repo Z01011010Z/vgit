@@ -157,6 +157,7 @@ function getStatus() {
 
 }
 
+let remoteURL;
 function getRemote() {
     git.branch((err, data) => {
         branches = data.all;
@@ -184,6 +185,7 @@ function getRemote() {
         for (let i = 0, len = data.length; i < len; i++) {
             if(remotes[i].name == repoStatus.tracking.split('/')[0]){
                 indexRemote = i + 1;
+                remoteURL = remotes[i].refs.push.split('//')[1];
             }
             contentRemote.push([remotes[i].name, remotes[i].refs.push]);
         }
@@ -707,9 +709,7 @@ let info = blessed.form({
     align: 'center',
     border: {
         type: 'line',
-        fg: 'lightcyan',
-    },
-    style: {
+        fg: 'lightcyan', }, style: {
         bg: "normal",
         fg: "normal",
         focus: { border: { fg: "cyan" } },
@@ -814,6 +814,96 @@ var tracking = blessed.text({
     },
 });
 
+let auth = blessed.form({
+    parent: remotetMenu,
+    name: 'form',
+    mouse: true,
+    keys: true,
+    vi: true,
+    tags: true,
+    align: 'center',
+    style: {
+        bg: "normal",
+        fg: "normal",
+    },
+    position: {
+        bottom: 0,
+        left: 0,
+        width: '30%',
+        height: 7,
+    },
+});
+
+let username = blessed.Textbox({
+    parent: auth,
+    mouse: true,
+    shrink: true,
+    inputOnFocus: true,
+    input: true,
+    padding: {
+        left: 1,
+        right: 1,
+    },
+    border: {
+        type: 'line',
+        fg: 'lightcyan',
+    },
+    position: {
+        top: 0,
+        left: 0,
+        width: '100%-2',
+        height: 3,
+    },
+    label: {
+        'text': 'Username',
+        'side': 'left',
+    },
+    style: {
+        fg: 'blue',
+        bg: 'black',
+        focus: {
+            bg: 'lightblack',
+            border: { fg: "magenta" },
+        },
+        hover: { bg: 'lightblack' },
+    }
+});
+
+let password = blessed.Textbox({
+    parent: auth,
+    mouse: true,
+    shrink: true,
+    inputOnFocus: true,
+    input: true,
+    padding: {
+        left: 1,
+        right: 1,
+    },
+    border: {
+        type: 'line',
+        fg: 'lightcyan',
+    },
+    position: {
+        bottom: 0,
+        left: 0,
+        width: '100%-2',
+        height: 3,
+    },
+    label: {
+        'text': 'Password',
+        'side': 'left',
+    },
+    style: {
+        fg: 'blue',
+        bg: 'black',
+        focus: {
+            bg: 'lightblack',
+            border: { fg: "magenta" },
+        },
+        hover: { bg: 'lightblack' },
+    }
+});
+
 let push = blessed.button({
     parent: remotetMenu,
     name: 'submit',
@@ -845,7 +935,8 @@ let push = blessed.button({
 });
 
 push.on('press', function() {
-    git.push(repoStatus.tracking.split('/')[0], repoStatus.current, (err, data) => {
+    git.push('https://' + username.getContent() + ':' + encodeURIComponent(password.getContent()) + '@' + remoteURL,
+        repoStatus.current, (err, data) => {
         remoteMessage.log('Push completed', () => {})
         getStatus();
     });
