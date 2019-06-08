@@ -875,6 +875,7 @@ let password = blessed.Textbox({
     shrink: true,
     inputOnFocus: true,
     input: true,
+    censor: true,
     padding: {
         left: 1,
         right: 1,
@@ -934,14 +935,6 @@ let push = blessed.button({
     }
 });
 
-push.on('press', function() {
-    git.push('https://' + username.getContent() + ':' + encodeURIComponent(password.getContent()) + '@' + remoteURL,
-        repoStatus.current, (err, data) => {
-        remoteMessage.log('Push completed', () => {})
-        getStatus();
-    });
-});
-
 let pull = blessed.button({
     parent: remotetMenu,
     name: 'submit',
@@ -972,8 +965,17 @@ let pull = blessed.button({
     }
 });
 
+push.on('press', function() {
+    git.push('https://' + username.getContent() + ':' + encodeURIComponent(password.value) + '@' + remoteURL,
+        repoStatus.current, (err, data) => {
+        remoteMessage.log('Push completed', () => {})
+        getStatus();
+    });
+});
+
 pull.on('press', function() {
-    git.pull(repoStatus.tracking.split('/')[0], repoStatus.current, (err, data) => {
+    git.pull('https://' + username.getContent() + ':' + encodeURIComponent(password.value) + '@' + remoteURL,
+        repoStatus.current, (err, data) => {
         remoteMessage.log('Pull completed', () => {})
         getStatus();
     });
