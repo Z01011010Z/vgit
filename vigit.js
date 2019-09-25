@@ -202,8 +202,12 @@ function getRemote() {
             if(commits[i].hash == data.latest.hash){
                 indexCurrent = i + 1;
             }
-            content.push([commits[i].message, commits[i].author_name,
-                commits[i].date, commits[i].hash])
+            content.push([
+                commits[i].message.substring(0, Math.floor(commitList.width / 4)),
+                commits[i].author_name,
+                commits[i].date.slice(0, -6),
+                commits[i].hash.substring(0,7)
+            ])
 
         }
         commitList.setData(content)
